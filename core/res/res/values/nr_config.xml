@@ -38,4 +38,7 @@
       <item>org.telegram.messenger.plus</item>
       <item>com.snapchat.android</item>
   </string-array>
+
+    <!-- Whether device has dash charging support -->
+    <bool name="config_hasDashCharger">false</bool>
 </resources>
