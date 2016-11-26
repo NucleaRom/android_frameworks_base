@@ -161,4 +161,10 @@ public class QuickStatusBarHeader extends RelativeLayout {
     public void setCallback(Callback qsPanelCallback) {
         mHeaderQsPanel.setCallback(qsPanelCallback);
     }
+
+    public void updateSettings() {
+        if (mQsPanel != null) {
+            mQsPanel.updateSettings();
+        }
+    }
 }
