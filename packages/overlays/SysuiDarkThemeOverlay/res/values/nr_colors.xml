@@ -20,4 +20,7 @@
     <!-- QS edit page background color -->
     <color name="qs_edit_item_decoration_bg">@*android:color/secondary_device_default_settings</color>
 
+    <!-- Dynamic Navbar -->
+    <color name="input_method_navigation_guard_dynamic">@android:color/transparent</color>
+    
 </resources>

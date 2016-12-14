@@ -4391,6 +4391,12 @@ public final class Settings {
          */
         public static final String QS_PANEL_BG_ALPHA = "qs_panel_bg_alpha";
 
+		/**
+        * Dynamic Navbar Switch
+        * @hide
+        */
+        public static final String NAVBAR_DYNAMIC = "navbar_dynamic";
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.

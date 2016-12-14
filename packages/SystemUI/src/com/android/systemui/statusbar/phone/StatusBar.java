@@ -271,6 +271,8 @@ import com.android.systemui.statusbar.stack.NotificationStackScrollLayout;
 import com.android.systemui.statusbar.stack.NotificationStackScrollLayout
         .OnChildLocationsChangedListener;
 import com.android.systemui.statusbar.stack.StackStateAnimator;
+import com.android.systemui.tuner.TunerService;
+import com.android.systemui.tuner.TunerService.Tunable;
 import com.android.systemui.util.NotificationChannels;
 import com.android.systemui.util.leak.LeakDetector;
 import com.android.systemui.tuner.TunerService;
@@ -300,7 +302,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         ActivatableNotificationView.OnActivatedListener,
         ExpandableNotificationRow.ExpansionLogger, NotificationData.Environment,
         ExpandableNotificationRow.OnExpandClickListener, InflationCallback,
-        ColorExtractor.OnColorsChangedListener, ConfigurationListener, Tunable, PackageChangedListener {
+        ColorExtractor.OnColorsChangedListener, ConfigurationListener,
+        PackageChangedListener, Tunable {
     public static final boolean MULTIUSER_DEBUG = false;
 
     public static final boolean ENABLE_REMOTE_INPUT =
@@ -425,6 +428,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             "lineagesystem:" + LineageSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL;
     private static final String LOCKSCREEN_MEDIA_METADATA =
             "lineagesecure:" + LineageSettings.Secure.LOCKSCREEN_MEDIA_METADATA;
+
+    private static final String NAVBAR_DYNAMIC =
+            "system:" + Settings.System.NAVBAR_DYNAMIC;
 
     static {
         boolean onlyCoreApps;
@@ -1164,6 +1170,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         } catch (RemoteException ex) {
             // no window manager? good luck with that
         }
+        Dependency.get(TunerService.class).addTunable(this,
+                NAVBAR_DYNAMIC);
 
         Dependency.get(TunerService.class).addTunable(this,
                 SCREEN_BRIGHTNESS_MODE,
@@ -8301,6 +8309,19 @@ public class StatusBar extends SystemUI implements DemoMode,
                 ActivityManagerNative.getDefault().closeSystemDialogs(reason);
             } catch (RemoteException e) {
             }
+        }
+    }
+
+    @Override
+    public void onTuningChanged(String key, String newValue) {
+        switch (key) {
+            case NAVBAR_DYNAMIC:
+                if (mNavigationBar != null && mNavigationBarView != null) {
+                    mNavigationBar.updateNavbarOverlay(mContext.getResources());
+                }
+                break;
+            default:
+                break;
         }
     }
 }
