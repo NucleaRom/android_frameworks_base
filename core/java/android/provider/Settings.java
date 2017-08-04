@@ -4351,6 +4351,12 @@ public final class Settings {
         public static final String TOAST_ICON = "toast_icon";
 
         /**
+         * Sensor block per-package
+         * @hide
+         */
+        public static final String SENSOR_BLOCK = "sensor_block";
+
+        /**
          * --- NucleaRom System settings end
          *  Add new system settings above this comment
          */
