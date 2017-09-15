@@ -41,4 +41,8 @@
     <!-- App permission tint -->
     <color name="app_permission_icon_tint">@android:color/black</color>
 
+    <!-- Materialize Toast notifications -->
+    <color name="toast_bg">@color/white</color>
+    <color name="toast_text">@color/black</color>
+
 </resources>
