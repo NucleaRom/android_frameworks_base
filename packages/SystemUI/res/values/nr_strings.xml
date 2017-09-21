@@ -37,4 +37,7 @@
    <color name="system_accent_color">@*android:color/material_deep_teal_700</color>
    <color name="system_primary_color_dark">@*android:color/primary_material_dark</color>
 
+   <!-- DUI -->
+   <string name="systemui_tuner_navbar_title">Stock settings</string>
+
 </resources>
