@@ -4331,6 +4331,12 @@ public final class Settings {
         public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
 
         /**
+         * Toast icon switch
+         * @hide
+         */
+        public static final String TOAST_ICON = "toast_icon";
+
+        /**
          * --- NucleaRom System settings end
          *  Add new system settings above this comment
          */
