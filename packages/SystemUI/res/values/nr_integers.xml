@@ -28,4 +28,7 @@
     <!-- The min animation duration for animating the fab out -->
     <integer name="recents_animate_fab_exit_duration">125</integer>
 
+    <!-- The duration (in milliseconds) of slim recent app screen animation. -->
+    <integer name="config_recentDefaultDur">150</integer> 
+
 </resources>
