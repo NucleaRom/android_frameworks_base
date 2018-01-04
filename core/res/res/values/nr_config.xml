@@ -61,4 +61,7 @@
     <!-- Whether the device requires overlays to be in /system/overlay -->
     <bool name="config_hasSystemOverlayPath">false</bool>
 
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_enableSmartPixels">false</bool>
+
 </resources>
