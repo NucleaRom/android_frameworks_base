@@ -4286,7 +4286,13 @@ public final class Settings {
          * @hide
          */
         public static final String STATUSBAR_CLOCK_DATE_POSITION = "statusbar_clock_date_position";
-        
+
+        /**
+          * Defines the screen-off animation to display
+          * @hide
+          */
+         public static final String SCREEN_OFF_ANIMATION = "screen_off_animation";
+
         /**
          * --- NucleaRom System settings end
          *  Add new system settings above this comment
