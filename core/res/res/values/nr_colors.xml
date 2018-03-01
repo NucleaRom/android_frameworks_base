@@ -17,6 +17,9 @@
 -->
 
 <resources>
+
+    <color name="updater_snackbar_text_color">@android:color/white</color>
+
     <!-- Notification icon/text dynamic tint -->
     <color name="notification_text_default_color">@android:color/notification_default_color</color>
 

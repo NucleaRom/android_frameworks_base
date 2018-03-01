@@ -17,6 +17,8 @@
 -->
 <resources>
 
+    <java-symbol type="color" name="updater_snackbar_text_color" />
+
   <!-- Notification icon/text dynamic tint -->
   <java-symbol type="bool" name="config_allowNotificationIconTextTinting" />
   <java-symbol type="bool" name="config_useDarkBgNotificationIconTextTinting" />
