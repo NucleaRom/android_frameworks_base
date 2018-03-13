@@ -16,6 +16,8 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <item name="qs_background_opacity" format="float" type="integer">0.87</item>
+
     <!-- The min animation duration for animating the fab in. -->
     <integer name="recents_animate_fab_enter_duration">225</integer>
     <!-- The animation delay for animating the fab in. This should roughly be the animation
