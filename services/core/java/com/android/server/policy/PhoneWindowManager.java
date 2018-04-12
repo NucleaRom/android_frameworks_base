@@ -9067,6 +9067,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         return mNavbarVisible;
     }
 
+    public boolean needsNavigationBar() {
+        return mNavbarVisible;
+    }
+
     /*
      * TODO: provide implementation later in bringup
      */

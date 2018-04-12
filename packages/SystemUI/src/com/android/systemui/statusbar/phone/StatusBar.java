@@ -726,9 +726,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (DEBUG_MEDIA) Log.v(TAG, "DEBUG_MEDIA: onMetadataChanged: " + metadata);
             mMediaMetadata = metadata;
             updateMediaMetaData(true, true);
-            if (mTickerEnabled == 2) {
-                tickTrackInfo();
-            }
             if (mNavigationBar != null) {
                 setMediaPlaying();
             }
@@ -776,7 +773,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             for (int i = 0; i < N; i++) {
                 final Entry entry = activeNotifications.get(i);
                 if (entry.notification.getPackageName().equals(pkg)) {
-                    tick(entry.notification, true, true, mMediaMetadata);
 			    // NotificationInflater calls async MediaNotificationProcessoron to create notification
                 // colors and when finished will trigger AsyncInflationFinished for all registered callbacks
                 // like StatusBar. From there we'll send updated colors to Pulse
@@ -8217,24 +8213,6 @@ public class StatusBar extends SystemUI implements DemoMode,
             mAssistManager.startAssist(args);
         }
     }
-
-    @Override
-    public void onTuningChanged(String key, String newValue) {
-        switch (key) {
-            case SCREEN_BRIGHTNESS_MODE:
-                mAutomaticBrightness = newValue != null && Integer.parseInt(newValue)
-                        == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-                break;
-            case STATUS_BAR_BRIGHTNESS_CONTROL:
-                mBrightnessControl = newValue != null && Integer.parseInt(newValue) == 1;
-                break;
-            case LOCKSCREEN_MEDIA_METADATA:
-                mShowMediaMetadata = newValue == null || Integer.parseInt(newValue) == 1;
-                break;
-            default:
-                break;
-        }
-    }
     
     @ChaosLab(name="GestureAnywhere", classification=Classification.NEW_METHOD)
     protected void addGestureAnywhereView() {
@@ -8315,6 +8293,16 @@ public class StatusBar extends SystemUI implements DemoMode,
     @Override
     public void onTuningChanged(String key, String newValue) {
         switch (key) {
+            case SCREEN_BRIGHTNESS_MODE:
+                mAutomaticBrightness = newValue != null && Integer.parseInt(newValue)
+                        == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+                break;
+            case STATUS_BAR_BRIGHTNESS_CONTROL:
+                mBrightnessControl = newValue != null && Integer.parseInt(newValue) == 1;
+                break;
+            case LOCKSCREEN_MEDIA_METADATA:
+                mShowMediaMetadata = newValue == null || Integer.parseInt(newValue) == 1;
+                break;
             case NAVBAR_DYNAMIC:
                 if (mNavigationBar != null && mNavigationBarView != null) {
                     mNavigationBar.updateNavbarOverlay(mContext.getResources());

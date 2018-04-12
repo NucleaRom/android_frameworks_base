@@ -665,8 +665,6 @@ public class AudioService extends IAudioService.Stub
         }
     };
 
-    private boolean mLinkNotificationWithVolume;
-
     // only these packages are allowed to override Pulse visualizer lock
     private static final String[] VISUALIZER_WHITELIST = new String[] {
             "android",

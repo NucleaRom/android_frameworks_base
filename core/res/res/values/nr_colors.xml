@@ -43,4 +43,7 @@
 
     <color name="updater_snackbar_text_color">@android:color/white</color>
 
+    <!-- Dynamic Navbar -->
+    <color name="input_method_navigation_guard_dynamic">@android:color/transparent</color>
+
 </resources>

@@ -249,7 +249,7 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Naviga
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
         filter.addAction(Intent.ACTION_SCREEN_ON);
         getContext().registerReceiverAsUser(mBroadcastReceiver, UserHandle.ALL, filter, null, null);
-        notifyNavigationBarScreenOn(true);
+        notifyNavigationBarScreenOn();
         mNavigationBarView.notifyInflateFromUser();
     }
 
@@ -843,7 +843,7 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Naviga
             vg.addView(mNavigationBarView.getBaseView());
             prepareNavigationBarView();
             checkNavBarModes();
-            notifyNavigationBarScreenOn(true);
+            notifyNavigationBarScreenOn();
         }
     }
 
