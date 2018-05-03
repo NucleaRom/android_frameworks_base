@@ -58,4 +58,7 @@
     <!-- The duration (in milliseconds) of slim recent app screen animation. -->
     <integer name="config_recentDefaultDur">150</integer>
 
+    <!-- Whether the device requires overlays to be in /system/overlay -->
+    <bool name="config_hasSystemOverlayPath">false</bool>
+
 </resources>
