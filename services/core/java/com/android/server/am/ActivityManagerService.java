@@ -414,6 +414,8 @@ import com.android.server.vr.VrManagerInternal;
 import com.android.server.wm.PinnedStackWindowController;
 import com.android.server.wm.WindowManagerService;
 
+import org.lineageos.internal.applications.LineageActivityManager;
+
 import java.text.SimpleDateFormat;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -1752,6 +1754,9 @@ public class ActivityManagerService extends IActivityManager.Stub
 
     private static String sTheRealBuildSerial = Build.UNKNOWN;
 
+    // Lineage sdk activity related helper
+    private LineageActivityManager mLineageActivityManager;
+
     /**
      * Current global configuration information. Contains general settings for the entire system,
      * also corresponds to the merged configuration of the default display.
@@ -2433,7 +2438,7 @@ public class ActivityManagerService extends IActivityManager.Stub
 
                     Notification.Builder builder = new Notification.Builder(mContext,
                             SystemNotificationChannels.SECURITY);
-                    builder.setSmallIcon(com.android.internal.R.drawable.stat_notify_privacy_guard)
+                    builder.setSmallIcon(com.android.internal.R.drawable.stat_notify_trust)
                             .setOngoing(true)
                             .setPriority(Notification.PRIORITY_LOW)
                             .setContentTitle(title)
@@ -12243,6 +12248,10 @@ public class ActivityManagerService extends IActivityManager.Stub
         RescueParty.onSettingsProviderPublished(mContext);
 
         //mUsageStatsService.monitorPackages();
+
+        // LineageActivityManager depends on settings so we can initialize only
+        // after providers are available.
+        mLineageActivityManager = new LineageActivityManager(mContext);
     }
 
     private void startPersistentApps(int matchFlags) {
@@ -24401,6 +24410,26 @@ public class ActivityManagerService extends IActivityManager.Stub
                 }
             }
         }
+
+        @Override
+        public boolean hasRunningActivity(int uid, @Nullable String packageName) {
+            if (packageName == null) return false;
+
+            synchronized (ActivityManagerService.this) {
+                for (int i = 0; i < mLruProcesses.size(); i++) {
+                    final ProcessRecord processRecord = mLruProcesses.get(i);
+                    if (processRecord.uid == uid) {
+                        for (int j = 0; j < processRecord.activities.size(); j++) {
+                            final ActivityRecord activityRecord = processRecord.activities.get(j);
+                            if (packageName.equals(activityRecord.packageName)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
     }
 
     /**
@@ -24815,5 +24844,9 @@ public class ActivityManagerService extends IActivityManager.Stub
                 Binder.restoreCallingIdentity(origId);
             }
         }
+    }
+
+    public boolean shouldForceLongScreen(String packageName) {
+        return mLineageActivityManager.shouldForceLongScreen(packageName);
     }
 }
