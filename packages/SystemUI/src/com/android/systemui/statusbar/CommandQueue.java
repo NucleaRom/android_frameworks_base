@@ -93,6 +93,7 @@ public class CommandQueue extends IStatusBar.Stub {
     private static final int MSG_SHOW_CHARGING_ANIMATION       = 44 << MSG_SHIFT;
     private static final int MSG_SHOW_PINNING_TOAST_ENTER_EXIT = 45 << MSG_SHIFT;
     private static final int MSG_SHOW_PINNING_TOAST_ESCAPE     = 46 << MSG_SHIFT;
+    private static final int MSG_TOGGLE_NAVIGATION_BAR         = 50 << MSG_SHIFT;
 
     public static final int FLAG_EXCLUDE_NONE = 0;
     public static final int FLAG_EXCLUDE_SEARCH_PANEL = 1 << 0;
@@ -165,6 +166,7 @@ public class CommandQueue extends IStatusBar.Stub {
         default void onFingerprintHelp(String message) { }
         default void onFingerprintError(String error) { }
         default void hideFingerprintDialog() { }
+        default void toggleNavigationBar(boolean enable) { }
     }
 
     @VisibleForTesting
@@ -479,6 +481,13 @@ public class CommandQueue extends IStatusBar.Stub {
             mHandler.obtainMessage(MSG_SHOW_GLOBAL_ACTIONS).sendToTarget();
         }
     }
+
+    public void toggleNavigationBar(boolean enable) {
+         synchronized (mLock) {
+             mHandler.removeMessages(MSG_TOGGLE_NAVIGATION_BAR);
+             mHandler.obtainMessage(MSG_TOGGLE_NAVIGATION_BAR, enable ? 1 : 0, 0, null).sendToTarget();
+         }
+     }
 
     @Override
     public void setTopAppHidesStatusBar(boolean hidesStatusBar) {
@@ -795,6 +804,11 @@ public class CommandQueue extends IStatusBar.Stub {
                 case MSG_SHOW_PINNING_TOAST_ESCAPE:
                     for (int i = 0; i < mCallbacks.size(); i++) {
                         mCallbacks.get(i).showPinningEscapeToast();
+                    }
+                    break;
+                case MSG_TOGGLE_NAVIGATION_BAR:
+                    for (int i = 0; i < mCallbacks.size(); i++) {
+                        mCallbacks.get(i).toggleNavigationBar(msg.arg1 != 0);
                     }
                     break;
             }

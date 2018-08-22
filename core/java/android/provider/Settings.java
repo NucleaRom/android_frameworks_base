@@ -7986,6 +7986,12 @@ public final class Settings {
                 "packages_to_clear_data_before_full_restore";
 
         /**
+         * Whether to enable navigation bar
+         * @hide
+         */
+        public static final String NAVIGATION_BAR_ENABLED = "navigation_bar_enabled";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
