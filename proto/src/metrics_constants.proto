@@ -6496,5 +6496,8 @@ message MetricsEvent {
 
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
+
+    // NucleaRom custom constants
+    NR_SETTINGS = 9999;
   }
 }
